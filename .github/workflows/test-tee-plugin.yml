@@ -1,0 +1,45 @@
+name: Test TEE Plugin
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-tee-plugin:
+    runs-on: ubuntu-latest
+
+    services:
+      tee-simulator:
+        image: phalanetwork/tappd-simulator:latest
+        ports:
+          - 8090:8090
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '23.3.0'
+
+    - name: Install dependencies
+      run: pnpm install
+
+    - name: Build Eliza Agent Docker Image
+      run: |
+        docker build -t eliza-agent:latest .
+        docker run -d -e TEE_MODE=DOCKER eliza-agent:latest
+
+    - name: Run Tests
+      run: |
+        # Simulate a message to Eliza
+        # This is a placeholder for the actual test command
+        echo "Running tests..."
+        # Verify derived keys and RA Quote
+        # This is a placeholder for the actual verification logic
+        echo "Verifying derived keys and RA Quote..."
