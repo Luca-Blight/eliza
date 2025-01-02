@@ -87,3 +87,10 @@ When using the provider through the runtime environment, ensure the following se
 DSTACK_SIMULATOR_ENDPOINT="your-endpoint-url" # Optional, for simulator purposes if testing on mac or windows
 WALLET_SECRET_SALT=your-secret-salt // Required to single agent deployments
 ```
+#### Testing
+
+To run the tests, use the following command:
+
+```bash
+pnpm vitest run tests
+```
